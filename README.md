@@ -9,7 +9,7 @@ Se você precisa fazer a gestão de entradas e saídas do seu dinheiro, então e
 ### Tecnologias
 
 - *:fire: React Native + TypeScript*
-- *:fire: Expo Bare Workflow*
+- *:fire: Expo Bare Workflow + Expo APIs*
 
 - *:fire: Styled Components*
 
