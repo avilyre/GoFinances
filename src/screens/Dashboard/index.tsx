@@ -10,8 +10,10 @@ import {
   User,
   UserGreetings,
   UserName,
-  LogoutIcon
+  LogoutIcon,
+  HighlightCardsContainer
 } from "./styles";
+import { HighlightCard } from "../../components/HighlightCard";
 
 export function Dashboard(): JSX.Element {
   return (
@@ -30,6 +32,11 @@ export function Dashboard(): JSX.Element {
           <LogoutIcon name="power" />
         </UserWrapper>
       </Header>
+      <HighlightCardsContainer>
+        <HighlightCard />
+        <HighlightCard />
+        <HighlightCard />
+      </HighlightCardsContainer>
     </Container>
   )
 }
