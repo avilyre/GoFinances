@@ -1,20 +1,23 @@
 import React from "react";
-import { Feather } from "@expo/vector-icons";
-
+import { HighlightCard } from "../../components/HighlightCard";
+import { HighlightCardType } from "../../components/HighlightCard/interface";
+import { HistoryCard } from "../../components/HistoryCard";
+import { historyTransactionsMock } from "../../components/HistoryCard/mocks";
 import {
   Container,
   Header,
-  UserWrapper,
-  UserInfo,
+  HighlightCardsContainer,
+  LogoutIcon,
   Photo,
   User,
   UserGreetings,
+  UserInfo,
   UserName,
-  LogoutIcon,
-  HighlightCardsContainer
+  UserWrapper,
+  HistoryTransactions,
+  Title
 } from "./styles";
-import { HighlightCard } from "../../components/HighlightCard";
-import { HighlightCardType } from "../../components/HighlightCard/interface";
+
 
 export function Dashboard(): JSX.Element {
   return (
@@ -33,6 +36,7 @@ export function Dashboard(): JSX.Element {
           <LogoutIcon name="power" />
         </UserWrapper>
       </Header>
+
       <HighlightCardsContainer>
         <HighlightCard
           type={HighlightCardType.up}
@@ -53,6 +57,14 @@ export function Dashboard(): JSX.Element {
           lastTransaction="01 à 16 de Abril"
         />
       </HighlightCardsContainer>
+
+      <HistoryTransactions>
+        <Title>Histórico</Title>
+
+        <HistoryCard
+          data={historyTransactionsMock[0]}
+        />
+      </HistoryTransactions>
     </Container>
   )
 }

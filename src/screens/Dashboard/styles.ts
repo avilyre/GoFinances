@@ -74,3 +74,19 @@ export const LogoutIcon = styled(Feather)`
   color: ${({ theme }) => theme.colors.secondary};
   font-size: ${RFValue(24)}px;
 `;
+
+export const HistoryTransactions = styled.View`
+  flex: 1;
+  padding: 0 24px;
+  
+  margin-top: ${RFPercentage(12)}px;
+`;
+
+export const Title = styled.Text`
+  color: ${({ theme }) => theme.colors.text_dark};
+
+  font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: ${RFValue(18)}px;
+
+  margin-bottom: 16px;
+`;
