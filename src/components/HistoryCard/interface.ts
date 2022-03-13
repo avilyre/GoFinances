@@ -3,11 +3,23 @@ interface Category {
   name: string;
 }
 
+export interface HistoryCardDataProps {
+  type: TransactionType;
+  title: string;
+  amount: string;
+  category: Category;
+  date: string;
+}
+
+export enum TransactionType {
+  income = "income",
+  outcome = "outcome"
+}
+
 export interface HistoryCardProps {
-  data: {
-    title: string;
-    amount: string;
-    category: Category;
-    date: string;
-  }
+  data: HistoryCardDataProps
+}
+
+export interface AmountTransactionType {
+  transactionType: TransactionType;
 }

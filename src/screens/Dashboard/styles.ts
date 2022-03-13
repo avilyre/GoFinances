@@ -1,8 +1,11 @@
+import { FlatList, FlatListProps } from "react-native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
-
+import { getBottomSpace } from "react-native-iphone-x-helper";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
+
+import { DataProps } from "./index";
 
 export const Container = styled.View`
   flex: 1;
@@ -75,7 +78,7 @@ export const LogoutIcon = styled(Feather)`
   font-size: ${RFValue(24)}px;
 `;
 
-export const HistoryTransactions = styled.View`
+export const HistoryTransactionsContainer = styled.View`
   flex: 1;
   padding: 0 24px;
   
@@ -90,3 +93,14 @@ export const Title = styled.Text`
 
   margin-bottom: 16px;
 `;
+
+export const HistoryTransactionsList = styled(
+  FlatList as new (
+    props: FlatListProps<DataProps>
+  ) => FlatList<DataProps>
+).attrs({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingBottom: getBottomSpace()
+  }
+})``;

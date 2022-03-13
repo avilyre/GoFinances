@@ -2,7 +2,8 @@ import React from "react";
 import { HighlightCard } from "../../components/HighlightCard";
 import { HighlightCardType } from "../../components/HighlightCard/interface";
 import { HistoryCard } from "../../components/HistoryCard";
-import { historyTransactionsMock } from "../../components/HistoryCard/mocks";
+import { HistoryCardDataProps } from "../../components/HistoryCard/interface";
+import { historyTransactionsMock } from "../../mocks/historyCardMocks";
 import {
   Container,
   Header,
@@ -14,10 +15,14 @@ import {
   UserInfo,
   UserName,
   UserWrapper,
-  HistoryTransactions,
-  Title
+  Title,
+  HistoryTransactionsContainer,
+  HistoryTransactionsList
 } from "./styles";
 
+export interface DataProps extends HistoryCardDataProps {
+  id: string;
+}
 
 export function Dashboard(): JSX.Element {
   return (
@@ -58,13 +63,17 @@ export function Dashboard(): JSX.Element {
         />
       </HighlightCardsContainer>
 
-      <HistoryTransactions>
+      <HistoryTransactionsContainer>
         <Title>Histórico</Title>
 
-        <HistoryCard
-          data={historyTransactionsMock[0]}
+        <HistoryTransactionsList
+          data={historyTransactionsMock}
+          renderItem={({ item }) => (
+              <HistoryCard data={item} />
+            )
+          }
         />
-      </HistoryTransactions>
+      </HistoryTransactionsContainer>
     </Container>
   )
 }

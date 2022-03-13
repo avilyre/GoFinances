@@ -1,5 +1,5 @@
 import React from "react";
-import { HistoryCardProps } from "./interface";
+import { HistoryCardProps, TransactionType } from "./interface";
 
 import {
   Container,
@@ -16,7 +16,10 @@ export function HistoryCard({ data }: HistoryCardProps): JSX.Element {
   return (
     <Container>
       <Title>{data.title}</Title>
-      <Amount>{data.amount}</Amount>
+      <Amount transactionType={data.type}>
+        {data.type === TransactionType.outcome && "- "}
+        {data.amount}
+      </Amount>
 
       <Footer>
         <Category>
