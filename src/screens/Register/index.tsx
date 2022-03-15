@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Button } from "../../components/Form/Button";
+import { CategorySelector } from "../../components/Form/CategorySelector";
 import { Input } from "../../components/Form/Input";
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
 import { TransactionType } from "../../global/interface";
@@ -46,6 +47,8 @@ export function Register(): JSX.Element {
               isActive={transactionType === TransactionType.outcome}
             />
           </TransactionTypes>
+
+          <CategorySelector title="Categoria" />
         </Fields>
 
         <Button title="Cadastrar" />
