@@ -1,4 +1,5 @@
 import React from "react";
+
 import { HighlightCard } from "../../components/HighlightCard";
 import { HighlightCardType } from "../../components/HighlightCard/interface";
 import { HistoryCard } from "../../components/HistoryCard";
