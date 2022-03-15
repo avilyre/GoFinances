@@ -1,3 +1,5 @@
+import { TransactionType } from "../../global/interface";
+
 interface Category {
   icon: string;
   name: string;
@@ -9,11 +11,6 @@ export interface HistoryCardDataProps {
   amount: string;
   category: Category;
   date: string;
-}
-
-export enum TransactionType {
-  income = "income",
-  outcome = "outcome"
 }
 
 export interface HistoryCardProps {

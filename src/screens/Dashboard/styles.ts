@@ -5,7 +5,7 @@ import { Feather } from "@expo/vector-icons";
 import { getBottomSpace } from "react-native-iphone-x-helper";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
-import { DataProps } from "./index";
+import { DataProps } from "./interface";
 
 export const Container = styled.View`
   flex: 1;

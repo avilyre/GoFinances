@@ -3,7 +3,6 @@ import React from "react";
 import { HighlightCard } from "../../components/HighlightCard";
 import { HighlightCardType } from "../../components/HighlightCard/interface";
 import { HistoryCard } from "../../components/HistoryCard";
-import { HistoryCardDataProps } from "../../components/HistoryCard/interface";
 import { historyTransactionsMock } from "../../mocks/historyCardMocks";
 import {
   Container,
@@ -20,10 +19,6 @@ import {
   HistoryTransactionsContainer,
   HistoryTransactionsList
 } from "./styles";
-
-export interface DataProps extends HistoryCardDataProps {
-  id: string;
-}
 
 export function Dashboard(): JSX.Element {
   return (
