@@ -1,4 +1,4 @@
-import { TransactionType } from "../components/HistoryCard/interface";
+import { TransactionType } from "../global/interface";
 
 export const historyTransactionsMock = [
   {
