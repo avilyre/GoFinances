@@ -1,17 +1,14 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Feather } from "@expo/vector-icons";
 import { FlatList, FlatListProps } from "react-native";
 import { Category } from "../../utils/categories/interface";
-
-export const Container = styled.View`
-  flex: 1;
-  background: ${({ theme }) => theme.colors.background};
-`;
+import { CategoryItemProps } from "./interface";
 
 export const Header = styled.View`
-  width: 100%;
   height: ${RFValue(113)}px;
+  width: 100%;
+  padding-bottom: 19px;
 
   background: ${({ theme }) => theme.colors.primary};
 
@@ -33,12 +30,16 @@ export const CategoryList = styled(
   ) => FlatList<Category>
 )``;
 
-export const CategoryItem = styled.TouchableOpacity`
+export const CategoryItem = styled.TouchableOpacity<CategoryItemProps>`
   width: 100%;
   padding: ${RFValue(15)}px;
 
   flex-direction: row;
   align-items: center;
+
+  ${({ isActive }) => isActive && css`
+    background: ${({ theme }) => theme.colors.text_light};
+  `}
 `;
 
 export const CategoryIcon = styled(Feather)`

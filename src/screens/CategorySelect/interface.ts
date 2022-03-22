@@ -1,9 +1,13 @@
 import { Category } from "../../utils/categories/interface";
 
-type CustomCategory = Pick<Category, "key" | "name">;
+export type CustomCategory = Pick<Category, "key" | "title">;
 
 export interface CategorySelectProps {
-  category: string;
-  setCategory(category: CustomCategory): void
+  category: CustomCategory;
+  setCategory(category: Category): void
   closeSelectCategory(): void;
+}
+
+export interface CategoryItemProps {
+  isActive: boolean;
 }

@@ -1,13 +1,13 @@
 import React from "react";
+
 import { Button } from "../../components/Form/Button";
+import { ScreenDetailsTemplate } from "../../components/templates/ScreenDetailsTemplate";
 import { categories } from "../../utils/categories";
+import { Category } from "../../utils/categories/interface";
 
 import { CategorySelectProps } from "./interface";
 
 import {
-  Container,
-  Header,
-  Title,
   CategoryList,
   CategoryItem,
   CategoryIcon,
@@ -21,27 +21,31 @@ export function CategorySelect({
   setCategory,
   closeSelectCategory
 }: CategorySelectProps): JSX.Element {
-  return (
-    <Container>
-      <Header>
-        <Title>Categorias</Title>
-      </Header>
 
+  const handleCategoryItem = (category: Category) => {
+    setCategory(category);
+  }
+
+  return (
+    <ScreenDetailsTemplate title="Categorias" isModal>
       <CategoryList
         data={categories}
         keyExtractor={item => item.key}
         renderItem={({ item }) => (
-          <CategoryItem>
+          <CategoryItem
+            onPress={() => handleCategoryItem(item)}
+            isActive={category.key === item.key}
+          >
             <CategoryIcon name={item.icon} />
-            <CategoryName>{item.name}</CategoryName>
+            <CategoryName>{item.title}</CategoryName>
           </CategoryItem>
         )}
         ItemSeparatorComponent={() => <Separator />}
       />
 
       <Footer>
-        <Button title="Selecionar" />
+        <Button title="Selecionar" onPress={closeSelectCategory} />
       </Footer>
-    </Container>
+    </ScreenDetailsTemplate>
   );
 }

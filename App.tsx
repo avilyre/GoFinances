@@ -10,7 +10,6 @@ import {
 
 import theme from "./src/global/styles/theme";
 import { Dashboard } from './src/screens/Dashboard';
-import { CategorySelect } from './src/screens/CategorySelect';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -25,7 +24,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CategorySelect />
+      <Dashboard />
     </ThemeProvider>
   );
 }
