@@ -1,5 +1,6 @@
 import React from "react";
-import { HistoryCardProps, TransactionType } from "./interface";
+import { TransactionType } from "../../global/interface";
+import { HistoryCardProps } from "./interface";
 
 import {
   Container,

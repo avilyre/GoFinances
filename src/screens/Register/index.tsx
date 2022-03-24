@@ -1,15 +1,17 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Modal } from "react-native";
 
 import { Button } from "../../components/Form/Button";
 import { CategorySelectorButton } from "../../components/Form/CategorySelectorButton";
-import { Input } from "../../components/Form/Input";
+import { InputForm } from "../../components/Form/InputForm";
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
 import { ScreenDetailsTemplate } from "../../components/templates/ScreenDetailsTemplate";
 import { TransactionType } from "../../global/interface";
 import { categories } from "../../utils/categories";
 import { Category } from "../../utils/categories/interface";
 import { CategorySelect } from "../CategorySelect";
+import { FormProps } from "./interface";
 
 import { Form, Fields, TransactionTypes } from "./styles";
 
@@ -19,6 +21,7 @@ export function Register(): JSX.Element {
   const [category, setCategory] = useState<Category>(defaultCategory);
   const [transactionType, setTransactionType] = useState<TransactionType | undefined>();
   const [isCategorySelectModalEnabled, setIsCategorySelectModalEnabled] = useState(false);
+  const { control, handleSubmit } = useForm();
 
   const handleTransactionType = (type: TransactionType) => {
     setTransactionType(type);
@@ -28,12 +31,32 @@ export function Register(): JSX.Element {
     setIsCategorySelectModalEnabled(!isCategorySelectModalEnabled);
   }
 
+  const handleSubmitRegister = ({ name, amount }: FormProps) => {
+    const data = {
+      name,
+      amount,
+      transactionType,
+      category: category.key
+    };
+
+    console.log(data);
+  }
+
   return (
     <ScreenDetailsTemplate title="Registrar" >
       <Form>
         <Fields>
-          <Input placeholder="Nome" />
-          <Input placeholder="Preço" />
+          <InputForm
+            name="name"
+            control={control}
+            placeholder="Nome"
+          />
+
+          <InputForm
+            name="amount"
+            control={control}
+            placeholder="Preço"
+          />
 
           <TransactionTypes>
             <TransactionTypeButton
@@ -56,7 +79,10 @@ export function Register(): JSX.Element {
           />
         </Fields>
 
-        <Button title="Cadastrar" />
+        <Button
+          title="Cadastrar"
+          onPress={handleSubmit(handleSubmitRegister)}
+        />
       </Form>
 
       <Modal
