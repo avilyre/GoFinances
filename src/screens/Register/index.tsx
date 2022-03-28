@@ -21,7 +21,7 @@ export function Register(): JSX.Element {
   const [category, setCategory] = useState<Category>(defaultCategory);
   const [transactionType, setTransactionType] = useState<TransactionType | undefined>();
   const [isCategorySelectModalEnabled, setIsCategorySelectModalEnabled] = useState(false);
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm<FormProps>();
 
   const handleTransactionType = (type: TransactionType) => {
     setTransactionType(type);

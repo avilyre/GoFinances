@@ -6,6 +6,7 @@ import { InputFormProps } from "./interface";
 import { Container } from "./styles";
 
 export function InputForm({ name, control, ...rest }: InputFormProps): JSX.Element {
+  
   return (
     <Container>
       <Controller
