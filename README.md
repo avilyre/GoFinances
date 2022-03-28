@@ -14,6 +14,7 @@ Se você precisa fazer a gestão de entradas e saídas do seu dinheiro, então e
 
 - *:fire: Styled Components*
 - *:fire: React Hook Form*
+- *:fire: Yup Validator*
 
 ## A Aplicação
 

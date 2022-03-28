@@ -1,6 +1,15 @@
 import styled from "styled-components/native";
-import { Controller, ControllerProps } from "react-hook-form";
+import { RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled.View`
   width: 100%;
+`;
+
+export const Error = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: ${RFValue(12)}px;
+  color: ${({ theme }) => theme.colors.attention};
+
+  margin-left: 15px;
+  margin-bottom: 15px;
 `;

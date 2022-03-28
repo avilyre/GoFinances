@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Modal } from "react-native";
+import { Alert, Modal } from "react-native";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "../../components/Form/Button";
 import { CategorySelectorButton } from "../../components/Form/CategorySelectorButton";
@@ -14,6 +15,7 @@ import { CategorySelect } from "../CategorySelect";
 import { FormProps } from "./interface";
 
 import { Form, Fields, TransactionTypes } from "./styles";
+import { formSchema } from "./utils";
 
 export function Register(): JSX.Element {
   const defaultCategory = categories[0];
@@ -21,7 +23,9 @@ export function Register(): JSX.Element {
   const [category, setCategory] = useState<Category>(defaultCategory);
   const [transactionType, setTransactionType] = useState<TransactionType | undefined>();
   const [isCategorySelectModalEnabled, setIsCategorySelectModalEnabled] = useState(false);
-  const { control, handleSubmit } = useForm<FormProps>();
+  const { control, handleSubmit, formState: { errors } } = useForm<FormProps>({
+    resolver: yupResolver(formSchema)
+  });
 
   const handleTransactionType = (type: TransactionType) => {
     setTransactionType(type);
@@ -32,6 +36,10 @@ export function Register(): JSX.Element {
   }
 
   const handleSubmitRegister = ({ name, amount }: FormProps) => {
+    if (!transactionType) {
+      return Alert.alert("Selecione o tipo de transação");
+    }
+
     const data = {
       name,
       amount,
@@ -40,6 +48,8 @@ export function Register(): JSX.Element {
     };
 
     console.log(data);
+
+    return data;
   }
 
   return (
@@ -52,6 +62,7 @@ export function Register(): JSX.Element {
             placeholder="Nome"
             autoCapitalize="sentences"
             autoCorrect={false}
+            error={errors.name && errors.name.message}
           />
 
           <InputForm
@@ -59,6 +70,7 @@ export function Register(): JSX.Element {
             control={control}
             placeholder="Preço"
             keyboardType="numeric"
+            error={errors.amount && errors.amount?.message}
           />
 
           <TransactionTypes>

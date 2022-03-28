@@ -3,10 +3,14 @@ import { Controller } from "react-hook-form";
 
 import { Input } from "../Input";
 import { InputFormProps } from "./interface";
-import { Container } from "./styles";
+import { Container, Error } from "./styles";
 
-export function InputForm({ name, control, ...rest }: InputFormProps): JSX.Element {
-  
+export function InputForm({
+  name,
+  control,
+  error,
+  ...rest
+}: InputFormProps): JSX.Element {
   return (
     <Container>
       <Controller
@@ -20,6 +24,7 @@ export function InputForm({ name, control, ...rest }: InputFormProps): JSX.Eleme
         )}
         name={name}
       />
+      {error && <Error>{error}</Error>}
     </Container>
   )
 }

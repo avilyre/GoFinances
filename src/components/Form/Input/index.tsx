@@ -4,8 +4,6 @@ import { Container } from "./styles";
 
 export function Input({ ...rest }: InputProps): JSX.Element {
   return (
-    <Container {...rest}>
-
-    </Container>
+    <Container {...rest} />
   );
 }
