@@ -1,6 +1,7 @@
 import React from "react";
-import { ScreenDetailsTemplateProps } from "./interface";
+import { Keyboard, TouchableWithoutFeedback } from "react-native";
 
+import { ScreenDetailsTemplateProps } from "./interface";
 import { Container, Header, Title } from "./styles";
 
 export function ScreenDetailsTemplate({
@@ -9,12 +10,14 @@ export function ScreenDetailsTemplate({
   children
 }: ScreenDetailsTemplateProps): JSX.Element {
   return (
-    <Container>
-      <Header isModal={isModal}>
-        <Title>{title}</Title>
-      </Header>
-      
-      {children}
-    </Container>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Container>
+        <Header isModal={isModal}>
+          <Title>{title}</Title>
+        </Header>
+        
+        {children}
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }
