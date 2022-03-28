@@ -4,7 +4,8 @@ Se você precisa fazer a gestão de entradas e saídas do seu dinheiro, então e
 
 ### Features
 
-- *:pencil: em desenvolvimento*
+- *:pencil: Cards de destaques: Entrada, Saída, Total*
+- *:pencil: Listagem do histórico de entradas e saídas*
 
 ### Tecnologias
 
@@ -12,6 +13,7 @@ Se você precisa fazer a gestão de entradas e saídas do seu dinheiro, então e
 - *:fire: Expo Bare Workflow + Expo APIs*
 
 - *:fire: Styled Components*
+- *:fire: React Hook Form*
 
 ## A Aplicação
 
