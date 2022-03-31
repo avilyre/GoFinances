@@ -2,23 +2,18 @@ import styled, { css } from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { TransactionType } from "../../../global/interface";
-import { ContainerProps, IconProps } from "./interface";
+import { ButtonProps, ContainerProps, IconProps } from "./interface";
+import { RectButton } from "react-native-gesture-handler";
 
-export const Container = styled.TouchableOpacity<ContainerProps>`
+export const Container = styled.View<ContainerProps>`
   /* Flex 1 will work too in another situation */
   width: 48%; 
-
-  padding: 18px;
 
   border-radius: 5px;
   ${({ isActive }) => !isActive && css`
     border-width: 1.5px;
     border: solid ${({ theme }) => theme.colors.text_light};
   `}
-
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 
   ${({ isActive, type }) => isActive && type === TransactionType.income && css`
     background: ${({ theme }) => theme.colors.successLight};
@@ -28,6 +23,14 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
   ${({ isActive, type }) => isActive && type === TransactionType.outcome && css`
     background: ${({ theme }) => theme.colors.attentionLight};
   `}
+`;
+
+export const Button = styled(RectButton)<ButtonProps>`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding: 18px;
 `;
 
 export const Icon = styled(Feather)<IconProps>`

@@ -1,4 +1,9 @@
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
+
+export const RootView = styled(GestureHandlerRootView)`
+  flex: 1;
+`;
 
 export const Form = styled.View`
   flex: 1;

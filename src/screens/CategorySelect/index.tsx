@@ -14,6 +14,7 @@ import {
   CategoryName,
   Separator,
   Footer,
+  RootView,
 } from "./styles";
 
 export function CategorySelect({
@@ -28,24 +29,26 @@ export function CategorySelect({
 
   return (
     <ScreenDetailsTemplate title="Categorias" isModal>
-      <CategoryList
-        data={categories}
-        keyExtractor={item => item.key}
-        renderItem={({ item }) => (
-          <CategoryItem
-            onPress={() => handleCategoryItem(item)}
-            isActive={category.key === item.key}
-          >
-            <CategoryIcon name={item.icon} />
-            <CategoryName>{item.title}</CategoryName>
-          </CategoryItem>
-        )}
-        ItemSeparatorComponent={() => <Separator />}
-      />
+      <RootView>
+        <CategoryList
+          data={categories}
+          keyExtractor={item => item.key}
+          renderItem={({ item }) => (
+            <CategoryItem
+              onPress={() => handleCategoryItem(item)}
+              isActive={category.key === item.key}
+            >
+              <CategoryIcon name={item.icon} />
+              <CategoryName>{item.title}</CategoryName>
+            </CategoryItem>
+          )}
+          ItemSeparatorComponent={() => <Separator />}
+        />
 
-      <Footer>
-        <Button title="Selecionar" onPress={closeSelectCategory} />
-      </Footer>
+        <Footer>
+          <Button title="Selecionar" onPress={closeSelectCategory} />
+        </Footer>
+      </RootView>
     </ScreenDetailsTemplate>
   );
 }

@@ -8,7 +8,7 @@ import {
   Container,
   Header,
   HighlightCardsContainer,
-  LogoutIcon,
+  Icon,
   Photo,
   User,
   UserGreetings,
@@ -17,7 +17,8 @@ import {
   UserWrapper,
   Title,
   HistoryTransactionsContainer,
-  HistoryTransactionsList
+  HistoryTransactionsList,
+  LogoutButton
 } from "./styles";
 
 export function Dashboard(): JSX.Element {
@@ -34,7 +35,9 @@ export function Dashboard(): JSX.Element {
               <UserName>Avily Silva</UserName>
             </User>
           </UserInfo>
-          <LogoutIcon name="power" />
+          <LogoutButton>
+            <Icon name="power" />
+          </LogoutButton>
         </UserWrapper>
       </Header>
 

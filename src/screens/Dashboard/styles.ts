@@ -6,8 +6,9 @@ import { getBottomSpace } from "react-native-iphone-x-helper";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 import { DataProps } from "./interface";
+import { BorderlessButton, GestureHandlerRootView } from "react-native-gesture-handler";
 
-export const Container = styled.View`
+export const Container = styled(GestureHandlerRootView)`
   flex: 1;
   background: ${({ theme }) => theme.colors.background};
 `;
@@ -73,7 +74,9 @@ export const UserName = styled.Text`
   font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
-export const LogoutIcon = styled(Feather)`
+export const LogoutButton = styled(BorderlessButton)``;
+
+export const Icon = styled(Feather)`
   color: ${({ theme }) => theme.colors.secondary};
   font-size: ${RFValue(24)}px;
 `;

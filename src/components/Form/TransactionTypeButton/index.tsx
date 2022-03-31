@@ -2,6 +2,7 @@ import React from "react";
 import { TransactionTypeButtonProps } from "./interface";
 
 import {
+  Button,
   Container,
   Icon,
   Title
@@ -19,14 +20,19 @@ export function TransactionTypeButton({
     <Container
         isActive={isActive}
         type={type}
+        >
+      <Button
+        isActive={isActive}
+        type={type}
         {...rest}
       >
-      <Icon
-        isActive={isActive}
-        name={icon[type]}
-        type={type}
-      />
-      <Title>{title}</Title>
+        <Icon
+          isActive={isActive}
+          name={icon[type]}
+          type={type}
+        />
+        <Title>{title}</Title>
+      </Button>
     </Container>
   );
 }

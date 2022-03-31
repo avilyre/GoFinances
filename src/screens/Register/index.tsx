@@ -14,7 +14,7 @@ import { Category } from "../../utils/categories/interface";
 import { CategorySelect } from "../CategorySelect";
 import { FormProps } from "./interface";
 
-import { Form, Fields, TransactionTypes } from "./styles";
+import { RootView, Form, Fields, TransactionTypes } from "./styles";
 import { formSchema } from "./utils";
 
 export function Register(): JSX.Element {
@@ -54,63 +54,65 @@ export function Register(): JSX.Element {
 
   return (
     <ScreenDetailsTemplate title="Registrar" >
-      <Form>
-        <Fields>
-          <InputForm
-            name="name"
-            control={control}
-            placeholder="Nome"
-            autoCapitalize="sentences"
-            autoCorrect={false}
-            error={errors.name && errors.name.message}
-          />
-
-          <InputForm
-            name="amount"
-            control={control}
-            placeholder="Preço"
-            keyboardType="numeric"
-            error={errors.amount && errors.amount?.message}
-          />
-
-          <TransactionTypes>
-            <TransactionTypeButton
-              title="Entrada"
-              type={TransactionType.income}
-              onPress={() => handleTransactionType(TransactionType.income)}
-              isActive={transactionType === TransactionType.income}
+      <RootView>
+        <Form>
+          <Fields>
+            <InputForm
+              name="name"
+              control={control}
+              placeholder="Nome"
+              autoCapitalize="sentences"
+              autoCorrect={false}
+              error={errors.name && errors.name.message}
             />
-            <TransactionTypeButton
-              title="Saída"
-              type={TransactionType.outcome}
-              onPress={() => handleTransactionType(TransactionType.outcome)}
-              isActive={transactionType === TransactionType.outcome}
+
+            <InputForm
+              name="amount"
+              control={control}
+              placeholder="Preço"
+              keyboardType="numeric"
+              error={errors.amount && errors.amount?.message}
             />
-          </TransactionTypes>
 
-          <CategorySelectorButton
-            title={category.title}
-            onPress={handleToggleCategorySelect}
+            <TransactionTypes>
+              <TransactionTypeButton
+                title="Entrada"
+                type={TransactionType.income}
+                onPress={() => handleTransactionType(TransactionType.income)}
+                isActive={transactionType === TransactionType.income}
+              />
+              <TransactionTypeButton
+                title="Saída"
+                type={TransactionType.outcome}
+                onPress={() => handleTransactionType(TransactionType.outcome)}
+                isActive={transactionType === TransactionType.outcome}
+              />
+            </TransactionTypes>
+
+            <CategorySelectorButton
+              title={category.title}
+              onPress={handleToggleCategorySelect}
+            />
+          </Fields>
+
+          <Button
+            title="Cadastrar"
+            onPress={handleSubmit(handleSubmitRegister)}
           />
-        </Fields>
+        </Form>
 
-        <Button
-          title="Cadastrar"
-          onPress={handleSubmit(handleSubmitRegister)}
-        />
-      </Form>
-
-      <Modal
-        animationType="slide"
-        visible={isCategorySelectModalEnabled}
-        onRequestClose={handleToggleCategorySelect}
-      >
-        <CategorySelect
-          category={category}
-          setCategory={setCategory}
-          closeSelectCategory={handleToggleCategorySelect}
-        />
-      </Modal>
+        <Modal
+          animationType="slide"
+          visible={isCategorySelectModalEnabled}
+          onRequestClose={handleToggleCategorySelect}
+        >
+          <CategorySelect
+            category={category}
+            setCategory={setCategory}
+            closeSelectCategory={handleToggleCategorySelect}
+          />
+        </Modal>
+      </RootView>
     </ScreenDetailsTemplate>
   );
 }

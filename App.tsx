@@ -11,8 +11,8 @@ import {
 } from "@expo-google-fonts/poppins";
 
 import theme from "./src/global/styles/theme";
-import { Dashboard } from './src/screens/Dashboard';
 import { AppRoutes } from './src/routes/app.routes';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
