@@ -1,6 +1,6 @@
 import React from "react";
 import { TransactionType } from "../../global/interface";
-import { categories } from "../../utils/categories";
+import { categories } from "../../constants/categories";
 import { HistoryCardProps } from "./interface";
 
 import {

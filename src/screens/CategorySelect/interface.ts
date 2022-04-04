@@ -1,4 +1,4 @@
-import { Category } from "../../utils/categories/interface";
+import { Category } from "../../constants/categories/interface";
 
 export type CustomCategory = Pick<Category, "key" | "title">;
 

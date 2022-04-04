@@ -2,7 +2,7 @@ import styled, { css } from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Feather } from "@expo/vector-icons";
 import { FlatList, FlatListProps } from "react-native";
-import { Category } from "../../utils/categories/interface";
+import { Category } from "../../constants/categories/interface";
 import { CategoryItemProps } from "./interface";
 import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
 

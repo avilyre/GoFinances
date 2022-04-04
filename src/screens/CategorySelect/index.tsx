@@ -2,8 +2,8 @@ import React from "react";
 
 import { Button } from "../../components/Form/Button";
 import { ScreenDetailsTemplate } from "../../components/templates/ScreenDetailsTemplate";
-import { categories } from "../../utils/categories";
-import { Category } from "../../utils/categories/interface";
+import { categories } from "../../constants/categories";
+import { Category } from "../../constants/categories/interface";
 
 import { CategorySelectProps } from "./interface";
 

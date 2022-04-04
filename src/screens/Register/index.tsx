@@ -12,8 +12,8 @@ import { InputForm } from "../../components/Form/InputForm";
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
 import { ScreenDetailsTemplate } from "../../components/templates/ScreenDetailsTemplate";
 import { TransactionType } from "../../global/interface";
-import { categories } from "../../utils/categories";
-import { Category } from "../../utils/categories/interface";
+import { categories } from "../../constants/categories";
+import { Category } from "../../constants/categories/interface";
 import { CategorySelect } from "../CategorySelect";
 import { FormProps } from "./interface";
 

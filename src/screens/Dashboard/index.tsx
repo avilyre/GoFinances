@@ -24,6 +24,7 @@ import {
   LogoutButton
 } from "./styles";
 import { dataKeys } from "../../constants/dataKeys";
+import { currencyFormatter, dateFormatter } from "../../utils/formatters";
 
 export function Dashboard(): JSX.Element {
   const [data, setData] = useState<DataProps[]>([]);
@@ -33,22 +34,10 @@ export function Dashboard(): JSX.Element {
     const history = response ? JSON.parse(response) : [];
 
     const historyFormatted = history.map((item: DataProps) => {
-      const amount = Number(item.amount).toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-      });
-
-      const date = Intl.DateTimeFormat("pt-BR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "2-digit"
-      }).format(new Date(item.date));
+      const amount = currencyFormatter(Number(item.amount));
+      const date = dateFormatter(new Date(item.date));
       
-      return {
-        ...item,
-        amount,
-        date
-      };
+      return { ...item, amount, date };
     });
 
     setData(historyFormatted);
