@@ -1,5 +1,6 @@
 import React from "react";
 import { TransactionType } from "../../global/interface";
+import { categories } from "../../utils/categories";
 import { HistoryCardProps } from "./interface";
 
 import {
@@ -14,9 +15,11 @@ import {
 } from "./styles";
 
 export function HistoryCard({ data }: HistoryCardProps): JSX.Element {
+  const [category] = categories.filter(item => item.key === data.category);
+
   return (
     <Container>
-      <Title>{data.title}</Title>
+      <Title>{data.name}</Title>
       <Amount transactionType={data.type}>
         {data.type === TransactionType.outcome && "- "}
         {data.amount}
@@ -24,8 +27,8 @@ export function HistoryCard({ data }: HistoryCardProps): JSX.Element {
 
       <Footer>
         <Category>
-          <Icon name={data.category.icon} />
-          <CategoryName>{data.category.name}</CategoryName>
+          <Icon name={category.icon} />
+          <CategoryName>{category.title}</CategoryName>
         </Category>
 
         <Date>{data.date}</Date>

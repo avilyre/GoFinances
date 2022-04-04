@@ -7,9 +7,9 @@ interface Category {
 
 export interface HistoryCardDataProps {
   type: TransactionType;
-  title: string;
+  name: string;
   amount: string;
-  category: Category;
+  category: string;
   date: string;
 }
 

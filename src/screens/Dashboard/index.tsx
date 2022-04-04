@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { HighlightCard } from "../../components/HighlightCard";
 import { HighlightCardType } from "../../components/HighlightCard/interface";
 import { HistoryCard } from "../../components/HistoryCard";
-import { historyTransactionsMock } from "../../mocks/historyCardMocks";
+import { DataProps } from "./interface";
+
 import {
   Container,
   Header,
@@ -20,8 +23,41 @@ import {
   HistoryTransactionsList,
   LogoutButton
 } from "./styles";
+import { dataKeys } from "../../constants/dataKeys";
 
 export function Dashboard(): JSX.Element {
+  const [data, setData] = useState<DataProps[]>([]);
+  
+  async function loadHistory() {
+    const response = await AsyncStorage.getItem(dataKeys.transactions);
+    const history = response ? JSON.parse(response) : [];
+
+    const historyFormatted = history.map((item: DataProps) => {
+      const amount = Number(item.amount).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+      });
+
+      const date = Intl.DateTimeFormat("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit"
+      }).format(new Date(item.date));
+      
+      return {
+        ...item,
+        amount,
+        date
+      };
+    });
+
+    setData(historyFormatted);
+  }
+
+  useEffect(() => {
+    loadHistory();
+  }, []);
+
   return (
     <Container>
       <Header>
@@ -66,11 +102,10 @@ export function Dashboard(): JSX.Element {
         <Title>Histórico</Title>
 
         <HistoryTransactionsList
-          data={historyTransactionsMock}
+          data={data}
           renderItem={({ item }) => (
-              <HistoryCard data={item} />
-            )
-          }
+            <HistoryCard data={item} />
+          )}
         />
       </HistoryTransactionsContainer>
     </Container>
