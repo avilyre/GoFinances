@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
+import { useFocusEffect } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { HighlightCard } from "../../components/HighlightCard";
@@ -46,6 +47,10 @@ export function Dashboard(): JSX.Element {
   useEffect(() => {
     loadHistory();
   }, []);
+
+  useFocusEffect(useCallback(() => {
+    loadHistory();
+  }, []));
 
   return (
     <Container>
