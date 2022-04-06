@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { HighlightCard } from "../../components/HighlightCard";
 import { HighlightCardType } from "../../components/HighlightCard/interface";
 import { HistoryCard } from "../../components/HistoryCard";
-import { DataProps } from "./interface";
+import { DataProps, HighlightData } from "./interface";
 
 import {
   Container,
@@ -26,27 +26,54 @@ import {
 } from "./styles";
 import { dataKeys } from "../../constants/dataKeys";
 import { currencyFormatter, dateFormatter } from "../../utils/formatters";
+import { TransactionType } from "../../global/interface";
 
 export function Dashboard(): JSX.Element {
-  const [data, setData] = useState<DataProps[]>([]);
+  const [historyData, setHistoryData] = useState<DataProps[]>([]);
+  const [highlightData, setHighlightData] = useState<HighlightData>({
+    entries: { amount: currencyFormatter(0) },
+    expensives: { amount: currencyFormatter(0) },
+    total: { amount: currencyFormatter(0) }
+  });
   
   async function loadHistory() {
     const response = await AsyncStorage.getItem(dataKeys.transactions);
     const history = response ? JSON.parse(response) : [];
 
+    let entries = 0;
+    let expensives = 0;
+
     const historyFormatted = history.map((item: DataProps) => {
       const amount = currencyFormatter(Number(item.amount));
       const date = dateFormatter(new Date(item.date));
-      
+
+      if (item.type === TransactionType.income) {
+        entries += Number(item.amount);
+      }
+
+      if (item.type === TransactionType.outcome) {
+        expensives += Number(item.amount);
+      }
+
       return { ...item, amount, date };
     });
 
-    setData(historyFormatted);
+    const total = entries - expensives;
+
+    setHistoryData(historyFormatted);
+    setHighlightData({
+      entries: {
+        amount: currencyFormatter(entries),
+      },
+      expensives: {
+        amount: currencyFormatter(expensives)
+      },
+      total: {
+        amount: currencyFormatter(total)
+      }
+    });
   }
 
-  useEffect(() => {
-    loadHistory();
-  }, []);
 
   useFocusEffect(useCallback(() => {
     loadHistory();
@@ -75,19 +102,19 @@ export function Dashboard(): JSX.Element {
         <HighlightCard
           type={HighlightCardType.up}
           title="Entradas"
-          amount="R$ 17.000,00"
+          amount={highlightData.entries.amount}
           lastTransaction="Última entrada dia 13 de abril"
         />
         <HighlightCard
           type={HighlightCardType.down}
           title="Saídas"
-          amount="R$ 1.259,00"
+          amount={highlightData.expensives.amount}
           lastTransaction="Última saída dia 13 de abril"
         />
         <HighlightCard
           type={HighlightCardType.total}
-          title="Total"
-          amount="R$ 16.141,00"
+          title="Disponível"
+          amount={highlightData.total.amount}
           lastTransaction="01 à 16 de Abril"
         />
       </HighlightCardsContainer>
@@ -96,7 +123,7 @@ export function Dashboard(): JSX.Element {
         <Title>Histórico</Title>
 
         <HistoryTransactionsList
-          data={data}
+          data={historyData}
           renderItem={({ item }) => (
             <HistoryCard data={item} />
           )}
