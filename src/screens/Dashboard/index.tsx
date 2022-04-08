@@ -22,19 +22,21 @@ import {
   Title,
   HistoryTransactionsContainer,
   HistoryTransactionsList,
-  LogoutButton
+  LogoutButton,
+  LoadingContainer
 } from "./styles";
 import { dataKeys } from "../../constants/dataKeys";
 import { currencyFormatter, dateFormatter } from "../../utils/formatters";
 import { TransactionType } from "../../global/interface";
+import { ActivityIndicator } from "react-native";
+import { useTheme } from "styled-components";
 
 export function Dashboard(): JSX.Element {
+  const theme = useTheme();
+
+  const [isLoading, setIsLoading] = useState(true);
   const [historyData, setHistoryData] = useState<DataProps[]>([]);
-  const [highlightData, setHighlightData] = useState<HighlightData>({
-    entries: { amount: currencyFormatter(0) },
-    expensives: { amount: currencyFormatter(0) },
-    total: { amount: currencyFormatter(0) }
-  });
+  const [highlightData, setHighlightData] = useState<HighlightData>({} as HighlightData);
   
   async function loadHistory() {
     const response = await AsyncStorage.getItem(dataKeys.transactions);
@@ -72,8 +74,8 @@ export function Dashboard(): JSX.Element {
         amount: currencyFormatter(total)
       }
     });
+    setIsLoading(false);
   }
-
 
   useFocusEffect(useCallback(() => {
     loadHistory();
@@ -81,54 +83,62 @@ export function Dashboard(): JSX.Element {
 
   return (
     <Container>
-      <Header>
-        <UserWrapper>
-          <UserInfo>
-            <Photo source={{
-              uri: "https://avatars.githubusercontent.com/u/66757451?v=4",
-            }} />
-            <User>
-              <UserGreetings>Olá,</UserGreetings>
-              <UserName>Avily Silva</UserName>
-            </User>
-          </UserInfo>
-          <LogoutButton>
-            <Icon name="power" />
-          </LogoutButton>
-        </UserWrapper>
-      </Header>
+      {isLoading? 
+        <LoadingContainer>
+          <ActivityIndicator color={theme.colors.primary} size="large" />
+        </LoadingContainer>
+      :
+        <>
+          <Header>
+            <UserWrapper>
+              <UserInfo>
+                <Photo source={{
+                  uri: "https://avatars.githubusercontent.com/u/66757451?v=4",
+                }} />
+                <User>
+                  <UserGreetings>Olá,</UserGreetings>
+                  <UserName>Avily Silva</UserName>
+                </User>
+              </UserInfo>
+              <LogoutButton>
+                <Icon name="power" />
+              </LogoutButton>
+            </UserWrapper>
+          </Header>
 
-      <HighlightCardsContainer>
-        <HighlightCard
-          type={HighlightCardType.up}
-          title="Entradas"
-          amount={highlightData.entries.amount}
-          lastTransaction="Última entrada dia 13 de abril"
-        />
-        <HighlightCard
-          type={HighlightCardType.down}
-          title="Saídas"
-          amount={highlightData.expensives.amount}
-          lastTransaction="Última saída dia 13 de abril"
-        />
-        <HighlightCard
-          type={HighlightCardType.total}
-          title="Disponível"
-          amount={highlightData.total.amount}
-          lastTransaction="01 à 16 de Abril"
-        />
-      </HighlightCardsContainer>
+          <HighlightCardsContainer>
+            <HighlightCard
+              type={HighlightCardType.up}
+              title="Entradas"
+              amount={highlightData.entries.amount}
+              lastTransaction="Última entrada dia 13 de abril"
+            />
+            <HighlightCard
+              type={HighlightCardType.down}
+              title="Saídas"
+              amount={highlightData.expensives.amount}
+              lastTransaction="Última saída dia 13 de abril"
+            />
+            <HighlightCard
+              type={HighlightCardType.total}
+              title="Disponível"
+              amount={highlightData.total.amount}
+              lastTransaction="01 à 16 de Abril"
+            />
+          </HighlightCardsContainer>
 
-      <HistoryTransactionsContainer>
-        <Title>Histórico</Title>
+          <HistoryTransactionsContainer>
+            <Title>Histórico</Title>
 
-        <HistoryTransactionsList
-          data={historyData}
-          renderItem={({ item }) => (
-            <HistoryCard data={item} />
-          )}
-        />
-      </HistoryTransactionsContainer>
+            <HistoryTransactionsList
+              data={historyData}
+              renderItem={({ item }) => (
+                <HistoryCard data={item} />
+              )}
+            />
+          </HistoryTransactionsContainer>
+        </>
+      }
     </Container>
   )
 }
