@@ -30,6 +30,7 @@ import { currencyFormatter, dateFormatter } from "../../utils/formatters";
 import { TransactionType } from "../../global/interface";
 import { ActivityIndicator } from "react-native";
 import { useTheme } from "styled-components";
+import { getLastDate, getLastHistoryDate, getLastHistoryUpdate } from "./utils";
 
 export function Dashboard(): JSX.Element {
   const theme = useTheme();
@@ -62,16 +63,33 @@ export function Dashboard(): JSX.Element {
 
     const total = entries - expensives;
 
+    const lastEntriesDate = getLastHistoryDate({
+      collection: history as DataProps[],
+      typeHistory: TransactionType.income
+    });
+
+    const lastExpensivesDate = getLastHistoryDate({
+      collection: history as DataProps[],
+      typeHistory: TransactionType.outcome
+    });
+    
+    const lastUpdateDate = getLastHistoryUpdate({
+      collection: history as DataProps[]
+    });
+
     setHistoryData(historyFormatted);
     setHighlightData({
       entries: {
         amount: currencyFormatter(entries),
+        lastUpdate: lastEntriesDate
       },
       expensives: {
-        amount: currencyFormatter(expensives)
+        amount: currencyFormatter(expensives),
+        lastUpdate: lastExpensivesDate
       },
       total: {
-        amount: currencyFormatter(total)
+        amount: currencyFormatter(total),
+        lastUpdate: lastUpdateDate
       }
     });
     setIsLoading(false);
@@ -111,19 +129,19 @@ export function Dashboard(): JSX.Element {
               type={HighlightCardType.up}
               title="Entradas"
               amount={highlightData.entries.amount}
-              lastTransaction="Última entrada dia 13 de abril"
+              lastTransaction={highlightData.entries.lastUpdate}
             />
             <HighlightCard
               type={HighlightCardType.down}
               title="Saídas"
               amount={highlightData.expensives.amount}
-              lastTransaction="Última saída dia 13 de abril"
+              lastTransaction={highlightData.expensives.lastUpdate}
             />
             <HighlightCard
               type={HighlightCardType.total}
               title="Disponível"
               amount={highlightData.total.amount}
-              lastTransaction="01 à 16 de Abril"
+              lastTransaction={highlightData.total.lastUpdate}
             />
           </HighlightCardsContainer>
 

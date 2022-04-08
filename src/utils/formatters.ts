@@ -5,7 +5,6 @@ export function currencyFormatter(value: number): string {
   }).format(value);
 }
 
-
 export function dateFormatter(date: Date): string {
   return Intl.DateTimeFormat("pt-BR", {
     day: "2-digit",
