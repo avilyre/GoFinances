@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import uuid from "react-native-uuid";
 
 import { ResumeCard } from "../../components/ResumeCard";
 import { ScreenDetailsTemplate } from "../../components/templates/ScreenDetailsTemplate";
@@ -10,6 +11,7 @@ import { DataProps } from "../Dashboard/interface";
 import { TransactionType } from "../../global/interface";
 import { currencyFormatter } from "../../utils/formatters";
 import { ResumeCategoryData } from "./interface";
+import { ResumeCardsList } from "./styles";
 
 export function Resume(): JSX.Element {
   const [resumeCategories, setResumeCategories] = useState<ResumeCategoryData[]>(
@@ -40,8 +42,10 @@ export function Resume(): JSX.Element {
 
       if (categorySum !== 0) {
         totalByCategory.push({
-          name: category.title,
-          amount: currencyFormatter(categorySum)
+          id: uuid.v4() as string,
+          title: category.title,
+          amount: currencyFormatter(categorySum),
+          color: category.color
         });
       }
     });
@@ -66,10 +70,16 @@ export function Resume(): JSX.Element {
     <ScreenDetailsTemplate
       title="Resumo"
     >
-      <ResumeCard
-        title="Casa"
-        amount="R$ 150,00"
-        color="red"
+      <ResumeCardsList
+        data={resumeCategories}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <ResumeCard
+            title={item.title}
+            amount={item.amount}
+            color={item.color}
+          />
+        )}
       />
     </ScreenDetailsTemplate>
   );

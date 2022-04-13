@@ -1,4 +1,5 @@
-export interface ResumeCategoryData {
-  name: string;
-  amount: string;
+import { ResumeCardProps } from "../../components/ResumeCard/interface";
+
+export interface ResumeCategoryData extends ResumeCardProps {
+  id: string;
 }
