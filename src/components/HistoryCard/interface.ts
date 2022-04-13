@@ -1,9 +1,4 @@
-import { TransactionType } from "../../global/interface";
-
-interface Category {
-  icon: string;
-  name: string;
-}
+import { TransactionType } from "../../global/interface"
 
 export interface HistoryCardDataProps {
   type: TransactionType;
