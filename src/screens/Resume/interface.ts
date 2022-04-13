@@ -1,4 +1,4 @@
-export interface CategoryData {
+export interface ResumeCategoryData {
   name: string;
   amount: string;
 }
