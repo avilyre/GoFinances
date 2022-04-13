@@ -1,4 +1,5 @@
 export enum ScreenNames {
   Dashboard = "Dashboard",
-  Register = "Register"
+  Register = "Register",
+  Resume = "Resume"
 }
