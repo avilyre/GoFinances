@@ -7,6 +7,8 @@ Se você precisa fazer a gestão de entradas e saídas do seu dinheiro, então e
 - *:pencil: Cards de destaques: Entrada, Saída e Disponível*
 - *:pencil: Listagem do histórico de entradas e saídas*
 - *:pencil: Suas informações ficam salvas*
+- *:pencil: Visualização das saídas em gráfico*
+- *:pencil: Visualização das saídas em cards*
 
 ### Tecnologias
 
