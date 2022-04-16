@@ -11,6 +11,7 @@ export const ResumeCardsList = styled(
   }
 })`
   flex: 1;
+
   
   width: 100%;
 `;
